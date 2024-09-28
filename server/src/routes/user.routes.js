@@ -9,7 +9,7 @@ import {
   logInUser,
   logOutUser,
   getCurrentUser,
-} from "../controllers/user.controller.js";
+} from "../controllers/user.controllers.js";
 
 router.route("/register").post(upload.single("image"), registerUser);
 router.route("/logIn").post(logInUser);

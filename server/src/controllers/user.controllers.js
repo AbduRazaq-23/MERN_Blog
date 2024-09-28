@@ -1,6 +1,7 @@
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { asyncHandler } from "../utills/asyncHandler.js";
 import { User } from "../models/user.model.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { uploadOnCloudinary } from "../utills/cloudinary.js";
+import bcrypt from "bcrypt";
 
 //********************************************************************************//
 //@dec Registration Controller
@@ -15,6 +16,8 @@ const registerUser = asyncHandler(async (req, res) => {
   if (existedUser) {
     return res.status(409).json("User already exist with email");
   }
+
+  const hashPassword = await bcrypt.hash(password, 10);
 
   //@dec pick avatar local file path
   const avatarLocalPath = req.file?.path;
@@ -37,7 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     image: avatar?.url,
     email,
-    password,
+    password: hashPassword,
   });
 
   //@dec find that store data by id then store that on variable
@@ -73,7 +76,7 @@ const logInUser = asyncHandler(async (req, res) => {
   }
 
   //@dec then compare password is that valid
-  const isPasswordValid = await user.isPasswordCorrect(password);
+  const isPasswordValid = await bcrypt.compare(password, user.password);
 
   //@dec if not valid throw error
   if (!isPasswordValid) {
