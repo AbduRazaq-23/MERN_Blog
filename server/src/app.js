@@ -7,7 +7,7 @@ const app = express();
 //@dec middleware
 app.use(
   cors({
-    origin: "http://localhost/", // to change
+    origin: "http://localhost:5173", // to change
     Credential: true,
   })
 );

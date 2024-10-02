@@ -9,12 +9,12 @@ const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!(name, email, password)) {
-    return res.status(400).json("fill all the field");
+    return res.status(400).json({ message: "fill all the field" });
   }
 
   const existedUser = await User.findOne({ email });
   if (existedUser) {
-    return res.status(409).json("User already exist with email");
+    return res.status(409).json({ message: "User already exist with email" });
   }
 
   const hashPassword = await bcrypt.hash(password, 10);
@@ -24,7 +24,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //@dec if not available path throw error
   if (!avatarLocalPath) {
-    return res.status(400).json("Avatar localpath required");
+    return res.status(400).json({ message: "Avatar localpath required" });
   }
 
   //@dec upload on cloudinary store on variable that path
@@ -32,7 +32,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //@dec check if not availabe throw error
   if (!avatar) {
-    return res.status(400).json("avatar file required");
+    return res.status(500).json({ message: "avatar file required" });
   }
 
   //@dec store data on mongodb
@@ -48,7 +48,9 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //@dec if not find that data throw error
   if (!createdUser) {
-    return res.status(500).json("something went wrong while registration");
+    return res
+      .status(500)
+      .json({ message: "something went wrong while registration" });
   }
 
   //@dec return that as json
