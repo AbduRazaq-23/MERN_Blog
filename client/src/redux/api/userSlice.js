@@ -4,10 +4,10 @@ const userSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // singUp
     signUp: builder.mutation({
-      query: (data) => ({
-        url: "users/register",
+      query: (formData) => ({
+        url: "/users/register",
         method: "POST",
-        body: data,
+        body: formData,
       }),
     }),
     // signIn
