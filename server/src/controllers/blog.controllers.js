@@ -42,10 +42,23 @@ const PostBlog = asyncHandler(async (req, res) => {
 
 //********************************************************************************//
 //@dec deleteBlog Controller
+const getBlog = asyncHandler(async (req, res) => {
+  const { blogId } = req.params;
+  const findBlog = await Blog.findById(blogId);
+  return res.json(findBlog);
+});
+//********************************************************************************//
+//@dec deleteBlog Controller
+const getAllBlog = asyncHandler(async (req, res) => {
+  const allBlog = await Blog.find();
+  return res.json(allBlog);
+});
+//********************************************************************************//
+//@dec deleteBlog Controller
 const deleteBlog = asyncHandler(async (req, res) => {
   const { blogId } = req.params;
-  const deleteBlogById = await Blog.findByIdAndDelete(blogId);
+  await Blog.findByIdAndDelete(blogId);
   return res.json("blog deleted successfully");
 });
 
-export { PostBlog, deleteBlog };
+export { PostBlog, getBlog, getAllBlog, deleteBlog };

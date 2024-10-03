@@ -29,9 +29,10 @@ const userSlice = apiSlice.injectEndpoints({
     }),
     // getCurrentUser
     getCurrentUser: builder.query({
-      query: (userId) => ({
-        url: `/users/getcurrentuser/${userId}`,
+      query: () => ({
+        url: `/users/getcurrentuser`,
         method: "GET",
+        credentials: "include",
       }),
     }),
   }),

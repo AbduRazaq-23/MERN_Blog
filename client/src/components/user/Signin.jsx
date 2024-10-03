@@ -1,15 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSignInMutation } from "../../redux/api/userSlice";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signin = () => {
+  const navigate = useNavigate();
+  const [signInData, setSignInData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const changeHandler = (e) => {
+    const { name, value } = e.target;
+    setSignInData({
+      ...signInData,
+      [name]: value,
+    });
+  };
+
+  const [data, { isLoading, isError, error }] = useSignInMutation();
+  const submitSingInData = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await data(signInData);
+      console.log(res?.data?.message);
+      toast.success(res?.data?.message, { autoClose: 1000 });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="bg-gray-300 rounded-md  w-full h-full  md:w-[30%] mx-auto p-7 text-sm mt-32 mb-12 space-y-5">
       <h1 className="text-center font-bold text-xl">SignIn</h1>
-      <form onSubmit={""} className="flex flex-col space-y-4 rounded-md ">
-        <input className="p-1 rounded-md" type="text" placeholder="email" />
-        <input className="p-1 rounded-md" type="text" placeholder="password" />
-        <button className="bg-white rounded-md p-1 hover:font-semibold">
-          SignIn
+      <form
+        onSubmit={submitSingInData}
+        className="flex flex-col space-y-4 rounded-md "
+      >
+        <input
+          className="p-1 rounded-md"
+          type="text"
+          placeholder="email"
+          name="email"
+          value={signInData.email || ""}
+          onChange={changeHandler}
+        />
+        <input
+          className="p-1 rounded-md"
+          type="text"
+          placeholder="password"
+          name="password"
+          value={signInData.password || ""}
+          onChange={changeHandler}
+        />
+        <button
+          type="submit"
+          className="bg-white rounded-md p-1 hover:font-semibold"
+          disabled={isLoading}
+        >
+          {isLoading ? "SignIn..." : "SignIn"}
         </button>
       </form>
       <p className="text-center">
