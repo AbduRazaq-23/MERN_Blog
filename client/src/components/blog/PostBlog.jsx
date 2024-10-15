@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { usePostBlogMutation } from "../../redux/api/blogSlice";
+import { toast } from "react-toastify";
 
 const PostBlog = () => {
   const [image, setImage] = useState(null);
@@ -20,14 +22,22 @@ const PostBlog = () => {
     setImage(e.target.files[0]);
   };
 
-  const postBlog = (e) => {
+  const [post, { isError, isLoading, error }] = usePostBlogMutation();
+  const postBlog = async (e) => {
     e.preventDefault();
-    const data = {
-      ...blogData,
-      image,
-    };
 
-    console.log(data);
+    const formData = new FormData();
+    formData.append("title", blogData.title);
+    formData.append("description", blogData.description);
+    if (image) {
+      formData.append("image", image);
+    }
+    try {
+      const res = await post(formData).unwrap();
+      toast.success(res?.message, { autoClose: 1000 });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

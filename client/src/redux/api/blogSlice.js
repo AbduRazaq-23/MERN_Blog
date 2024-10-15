@@ -4,10 +4,10 @@ const blogSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // POST A BLOG
     postBlog: builder.mutation({
-      query: (data) => ({
+      query: (formData) => ({
         url: "/blog",
         method: "POST",
-        body: data,
+        body: formData,
       }),
     }),
     // GET ALL BLOG
