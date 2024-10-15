@@ -44,8 +44,9 @@ const PostBlog = asyncHandler(async (req, res) => {
 //@dec deleteBlog Controller
 const getBlog = asyncHandler(async (req, res) => {
   const { blogId } = req.params;
+
   const findBlog = await Blog.findById(blogId);
-  return res.json(findBlog);
+  return res.status(200).json(findBlog);
 });
 //********************************************************************************//
 //@dec deleteBlog Controller
