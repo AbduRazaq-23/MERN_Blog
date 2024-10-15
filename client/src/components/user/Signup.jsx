@@ -80,7 +80,7 @@ const Signup = () => {
           onChange={changeHandler}
         />
         <input
-          className="p-1 rounded-md"
+          className="p-1 rounded-md bg-gray-900"
           type="text"
           name="password"
           placeholder="password"
