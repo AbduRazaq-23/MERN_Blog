@@ -35,18 +35,24 @@ const PostBlog = () => {
     try {
       const res = await post(formData).unwrap();
       toast.success(res?.message, { autoClose: 1000 });
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div className="bg-gray-300 rounded-md w-full mx-auto p-7 text-sm">
+    <div className="bg-gray-800 rounded-md w-full mx-auto p-7 text-sm text-gray-300">
       <h1 className="text-center font-bold text-xl">PostBlog</h1>
       <form onSubmit={postBlog} className="flex flex-col space-y-4 rounded-md ">
-        <input type="file" name="file" onChange={handleFileChange} />
         <input
-          className="p-1 rounded-md"
+          className="bg-gray-900"
+          type="file"
+          name="file"
+          onChange={handleFileChange}
+        />
+        <input
+          className="p-1 rounded-md bg-gray-900 focus:outline-none"
           type="text"
           name="title"
           value={blogData.title}
@@ -54,7 +60,7 @@ const PostBlog = () => {
           placeholder="title"
         />
         <textarea
-          className="p-1 rounded-md"
+          className="p-1 rounded-md bg-gray-900 focus:outline-none"
           name="description"
           value={blogData.description}
           onChange={handleChange}
@@ -64,7 +70,7 @@ const PostBlog = () => {
         />
         <button
           type="submit"
-          className="bg-white rounded-md p-1 hover:font-semibold"
+          className="bg-gray-900 rounded-md p-1 hover:font-semibold"
         >
           PostBlog
         </button>

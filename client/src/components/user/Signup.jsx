@@ -56,7 +56,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="bg-gray-300 rounded-md  w-full h-full  md:w-[30%] mx-auto p-7 text-sm mt-32 mb-12 space-y-5">
+    <div className="bg-gray-800 text-gray-300 rounded-md  w-full h-full  md:w-[30%] mx-auto p-7 text-sm mt-32 mb-12 space-y-5">
       <h1 className="text-center font-bold text-xl">SignUp</h1>
       <form
         onSubmit={submitUserData}
@@ -64,7 +64,7 @@ const Signup = () => {
       >
         <input type="file" name="file" onChange={fileHandler} />
         <input
-          className="p-1 rounded-md"
+          className="p-1 rounded-md bg-gray-900"
           type="text"
           name="name"
           placeholder="name"
@@ -72,7 +72,7 @@ const Signup = () => {
           onChange={changeHandler}
         />
         <input
-          className="p-1 rounded-md"
+          className="p-1 rounded-md bg-gray-900"
           type="text"
           name="email"
           placeholder="email"
@@ -90,7 +90,7 @@ const Signup = () => {
 
         <button
           type="submit"
-          className="bg-white rounded-md p-1 hover:font-semibold"
+          className="bg-gray-900 rounded-md p-1 hover:font-semibold"
           disabled={isLoading}
         >
           {isLoading ? "SignUp..." : "SignUp"}

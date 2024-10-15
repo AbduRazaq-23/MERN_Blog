@@ -18,11 +18,13 @@ const blogSlice = apiSlice.injectEndpoints({
       }),
     }),
     // GET A BLOG
-    getBlog: builder.mutation({
+    getBlog: builder.query({
       query: (blogId) => ({
         url: `/blog/${blogId}`,
         method: "GET",
       }),
+      providesTags: ["Blog"],
+      keepUnusedDataFor: 5,
     }),
     // DELETE BLOG
     deleteBlog: builder.mutation({
@@ -37,6 +39,6 @@ const blogSlice = apiSlice.injectEndpoints({
 export const {
   usePostBlogMutation,
   useGetAllBlogQuery,
-  useGetBlogMutation,
+  useGetBlogQuery,
   useDeleteBlogMutation,
 } = blogSlice;

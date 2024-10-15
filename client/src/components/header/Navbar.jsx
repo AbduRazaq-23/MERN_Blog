@@ -27,7 +27,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full h-20 bg-gray-300 flex items-center justify-between px-5 fixed top-0 ">
+    <div className="w-full h-20 bg-gray-800 text-gray-300 flex items-center justify-between px-5 fixed top-0 ">
       <div className="w-10 h-12">
         <img
           src="https://cdn.pixabay.com/photo/2021/02/08/10/15/man-5994279_1280.png"

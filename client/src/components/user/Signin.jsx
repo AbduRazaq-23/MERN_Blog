@@ -33,14 +33,14 @@ const Signin = () => {
   };
 
   return (
-    <div className="bg-gray-300 rounded-md  w-full h-full  md:w-[30%] mx-auto p-7 text-sm mt-32 mb-12 space-y-5">
+    <div className="bg-gray-800 text-gray-300 rounded-md  w-full h-full  md:w-[30%] mx-auto p-7 text-sm mt-32 mb-12 space-y-5">
       <h1 className="text-center font-bold text-xl">SignIn</h1>
       <form
         onSubmit={submitSingInData}
         className="flex flex-col space-y-4 rounded-md "
       >
         <input
-          className="p-1 rounded-md"
+          className="p-1 rounded-md bg-gray-900"
           type="text"
           placeholder="email"
           name="email"
@@ -48,7 +48,7 @@ const Signin = () => {
           onChange={changeHandler}
         />
         <input
-          className="p-1 rounded-md"
+          className="p-1 rounded-md bg-gray-900"
           type="text"
           placeholder="password"
           name="password"
@@ -57,7 +57,7 @@ const Signin = () => {
         />
         <button
           type="submit"
-          className="bg-white rounded-md p-1 hover:font-semibold"
+          className=" rounded-md p-1 hover:font-semibold bg-gray-900"
           disabled={isLoading}
         >
           {isLoading ? "SignIn..." : "SignIn"}
